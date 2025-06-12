@@ -1,3 +1,5 @@
+import os
+from glob import glob
 from setuptools import setup
 
 package_name = 'cone_detector'
@@ -10,15 +12,18 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        ('share/' + package_name + '/launch', ['launch/cone_detector_launch.py']),
+        ('share/' + package_name + '/launch', glob('launch/*.py')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    description='YOLO-based cone detector ROS2 node',
+    maintainer='Frederic Strand',
+    maintainer_email='strandfrederic@outlook.com',
+    description='YOLO-based cone detector using ZED depth',
     license='Apache-2.0',
+    tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'cone_detector = cone_detector.cone_detector_node:main',
+            'cone_detector_node = cone_detector.cone_detector_node:main',
         ],
     },
 )
